@@ -1,0 +1,24 @@
+{
+  "todolist": [
+    {
+      "id": "1",
+      "task": "Doing Homework",
+      "complete": false
+    },
+    {
+      "id": "1",
+      "task": "Write code",
+      "complete": false
+    },
+    {
+      "id": "1",
+      "task": "Learn something",
+      "complete": false
+    },
+    {
+      "id": "b16af418-4790-16f3-fe73-6f49fb06c689",
+      "task": "Hello ",
+      "complete": false
+    }
+  ]
+}

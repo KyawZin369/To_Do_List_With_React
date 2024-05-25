@@ -1,25 +1,43 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react'
+import './App.css'
+import ToDoList from './components/ToDoList'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import ToDoForm from './components/ToDoForm'
+import { api } from './api/ApiData'
+import uuid from 'react-uuid'
 
-function App() {
+const App = () => {
+
+  const [task,setTask] = useState([]);
+
+  const FetchApi = async () => {
+    const toDoData = await api.get("todolist");
+    setTask(toDoData.data)
+  }
+
+  useEffect(()=>{
+    FetchApi()
+  },[])
+
+  const clickAddTask = async (userTask) => {
+    const dataToApi = {
+      "id" : uuid() ,
+      "task" : userTask ,
+      "complete" : false
+    }
+
+    const res = await api.post("todolist", dataToApi)
+
+    console.log(res.data)
+
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ToDoForm clickAddTask={clickAddTask}/>
+      <ToDoList task={task}/>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
