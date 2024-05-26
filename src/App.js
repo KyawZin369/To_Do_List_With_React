@@ -17,7 +17,7 @@ const App = () => {
 
   useEffect(()=>{
     FetchApi()
-  },[])
+  },[task])
 
   const clickAddTask = async (userTask) => {
     const dataToApi = {
@@ -25,17 +25,22 @@ const App = () => {
       "task" : userTask ,
       "complete" : false
     }
+    
+    await api.post("todolist", dataToApi)
+  }
 
-    const res = await api.post("todolist", dataToApi)
+  const deleteTask = async (task_id) => {
+    await api.delete(`todolist/${task_id}`)
+  }
 
-    console.log(res.data)
-
+  const CompleteTask = async (task_id,complete) => {
+    await api.patch(`todolist/${task_id}`,{complete})
   }
 
   return (
     <div>
       <ToDoForm clickAddTask={clickAddTask}/>
-      <ToDoList task={task}/>
+      <ToDoList task={task} deleteTask={deleteTask} CompleteTask={CompleteTask}/>
     </div>
   )
 }

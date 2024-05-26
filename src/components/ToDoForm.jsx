@@ -4,6 +4,10 @@ import "./form.css";
 const ToDoForm = ({clickAddTask}) => {
   const [userTask, setUserTask] = useState("");
 
+  const ClickAddTaskHandling = (userTask) => {
+    clickAddTask(userTask);
+    setUserTask("")
+  }
 
   return (
     <div>
@@ -23,7 +27,7 @@ const ToDoForm = ({clickAddTask}) => {
               </div>
               <button
                 type="button"
-                onClick={() => clickAddTask(userTask)}
+                onClick={() => ClickAddTaskHandling(userTask)}
                 className="btn btn-primary"
               >
                 <i className="fas fa-plus"></i> Add Task
